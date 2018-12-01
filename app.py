@@ -79,7 +79,7 @@ app.layout = html.Div([
 @app.callback(
     Output(component_id='pdf_graph', component_property='figure'),
     [Input(component_id='run_analysis_button', component_property='n_clicks')],
-    [State(component_id=box, component_property='value') for box in ['prior_wins', 'prior_losses', 'observed_wins', 'observed_losses']] +
+    [State(component_id=box, component_property='value') for box in ['prior_wins', 'prior_losses', 'observed_wins', 'observed_losses']] +    # list comprehension to get similar State() for all four boxes
     [State(component_id='conf_interval_selector', component_property='value')]
 )
 def update_graph(n_clicks, prior_wins, prior_losses, observed_wins, observed_losses, conf_interval):
@@ -109,8 +109,9 @@ def update_graph(n_clicks, prior_wins, prior_losses, observed_wins, observed_los
     
     # set up plotly traces for lower/upper bound vertical lines
     # get height of lines
-    line_height = max([posterior_beta.pdf(i) for i in np.linspace(0,1,100)]) 
+    line_height = max(y_plot)   # get the max height of the PDF curve from above
     
+    # set up plotly trace for LB line
     lb_trace = go.Scatter(
         x = [lb, lb],
         y = [0, line_height],
@@ -120,7 +121,7 @@ def update_graph(n_clicks, prior_wins, prior_losses, observed_wins, observed_los
         text = ['Lower Confidence Bound', 'Lower Confidence Bound'],
         #hoverinfo = 'text'
         )
-    
+    # set up plotly trace for UB line
     ub_trace = go.Scatter(
         x = [ub, ub],
         y = [0, line_height],
