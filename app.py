@@ -26,6 +26,7 @@ conf_interval_values = [0.99, 0.95, 0.90, 0.80]
 app.layout = html.Div([
     html.Div([
         html.H1('Ping Pong Winning Probability App'),
+        #html.P('this is some new text!'),
         html.P('Check the probability of winning a ping pong game based on the win/loss history of two players')
     ], className='twelve columns'),
     
@@ -191,5 +192,5 @@ def update_priors(n_clicks, prior_wins, prior_losses, observed_wins, observed_lo
 
 
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True, threaded=True)
     
