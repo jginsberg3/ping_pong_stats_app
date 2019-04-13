@@ -71,7 +71,11 @@ app.layout = html.Div([
             dcc.Graph(id='pdf_graph')
         ], className="six columns")
     
-    ], className='twelve columns')
+    ], className='twelve columns'),
+
+    html.Div([
+        html.A('Github', href='https://github.com/jginsberg3/ping_pong_stats_app', target="_blank")
+    ])
 
 ])
 

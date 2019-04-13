@@ -4,3 +4,4 @@ venv
 .env
 scratch.py
 to-dos.txt
+.vscode/*
